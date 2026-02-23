@@ -41,8 +41,12 @@ clean:
 	rm -rf node_modules package-lock.json
 	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 
-install: build
+install: 
 	@echo "📦 Installing Flare to $(DESTDIR)$(LIBDIR)..."
+	@if [ ! -d "node_modules" ]; then \
+		echo "📦 Installing Node.js dependencies first..."; \
+		npm install; \
+	fi
 	mkdir -p "$(DESTDIR)$(LIBDIR)"
 	mkdir -p "$(DESTDIR)$(BINDIR)"
 	mkdir -p "$(DESTDIR)$(SHAREDIR)/applications"
@@ -52,6 +56,7 @@ install: build
 	cp -r assets "$(DESTDIR)$(LIBDIR)/"
 	cp -r node_modules "$(DESTDIR)$(LIBDIR)/" 2>/dev/null || true
 	cp package.json "$(DESTDIR)$(LIBDIR)/"
+	cp main.js "$(DESTDIR)$(LIBDIR)/"
 	cp bin/flare "$(DESTDIR)$(BINDIR)/flare"
 	chmod +x "$(DESTDIR)$(BINDIR)/flare"
 	
