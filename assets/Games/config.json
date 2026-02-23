@@ -10,7 +10,8 @@
       "name": "Lutris",
       "type": "flatpak",
       "id": "net.lutris.Lutris",
-      "website": "https://flathub.org/apps/net.lutris.Lutris"
+      "website": "https://flathub.org/apps/net.lutris.Lutris",
+      "icon": "assets/Games/lutris.png"
     },
     {
       "name": "Proton-Plus",

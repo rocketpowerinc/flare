@@ -75,7 +75,13 @@ function loadCategory(category) {
   category.apps.forEach(app => {
     const card = document.createElement("div");
     card.className = "app-card";
-    card.innerHTML = `<div class="app-name">${app.name}</div><div class="app-status"></div>`;
+    
+    let cardContent = "";
+    if (app.icon) {
+      cardContent = `<img src="${app.icon}" class="app-icon" alt="${app.name}"><br>`;
+    }
+    cardContent += `<div class="app-name">${app.name}</div><div class="app-status"></div>`;
+    card.innerHTML = cardContent;
 
     // Check installation status
     checkInstallation(app).then(isInstalled => {
