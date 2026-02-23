@@ -5,12 +5,14 @@ All notable changes to this project will be documented in this file.
 ## [2.0.0] - 2024-02-23
 
 ### Changed
+
 - **Restructured as native Linux project** - No longer relies on Docker
 - **Modular directory structure** - Proper separation of concerns
 - **Makefile build system** - Professional build automation
 - **Improved documentation** - Comprehensive guides for installation and development
 
 ### Added
+
 - `bin/flare` - Executable launcher script
 - `Makefile` - Build, install, and development targets
 - `src/` directory structure with proper module organization
@@ -27,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - `.editorconfig` - Editor configuration
 
 ### Improved
+
 - Cleaner project organization
 - Better documentation
 - Professional build system
@@ -36,6 +39,7 @@ All notable changes to this project will be documented in this file.
 ## [1.0.0] - 2024-02-01
 
 ### Initial Release
+
 - Electron-based application launcher
 - Flatpak integration
 - Category-based organization

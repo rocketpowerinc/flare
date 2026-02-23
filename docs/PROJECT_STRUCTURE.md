@@ -48,17 +48,17 @@ flare/
 
 ## Key Files Explained
 
-| File | Purpose |
-|------|---------|
-| `bin/flare` | Executable entry point - handles dependency checks and launches Electron |
-| `src/main.js` | Electron main process - window management, IPC handlers |
-| `src/AppLauncher.js` | Frontend logic - app launching, UI interactions |
-| `src/ui/index.html` | Single HTML page - UI markup and styling |
-| `src/services/categoryService.js` | Data layer - reads configs and returns category data |
-| `assets/*/config.json` | App definitions in JSON format |
-| `config/flare.desktop` | Desktop application file for system integration |
-| `Makefile` | Build targets: dev, build, install, uninstall, clean |
-| `package.json` | Node.js dependencies (Electron) |
+| File                              | Purpose                                                                  |
+| --------------------------------- | ------------------------------------------------------------------------ |
+| `bin/flare`                       | Executable entry point - handles dependency checks and launches Electron |
+| `src/main.js`                     | Electron main process - window management, IPC handlers                  |
+| `src/AppLauncher.js`              | Frontend logic - app launching, UI interactions                          |
+| `src/ui/index.html`               | Single HTML page - UI markup and styling                                 |
+| `src/services/categoryService.js` | Data layer - reads configs and returns category data                     |
+| `assets/*/config.json`            | App definitions in JSON format                                           |
+| `config/flare.desktop`            | Desktop application file for system integration                          |
+| `Makefile`                        | Build targets: dev, build, install, uninstall, clean                     |
+| `package.json`                    | Node.js dependencies (Electron)                                          |
 
 ## Build Targets (Makefile)
 
@@ -83,6 +83,7 @@ When installed with `make install PREFIX=/usr/local`:
 ## System Integration
 
 Desktop file enables:
+
 - Application menu integration
 - Desktop shortcut creation
 - System launcher discovery
@@ -114,6 +115,7 @@ git push origin feature/my-feature
 ## Comparison: Before vs After
 
 ### Before (Docker-based)
+
 - Single bash script
 - Docker dependency required
 - Not truly native Linux
@@ -121,6 +123,7 @@ git push origin feature/my-feature
 - No standard build system
 
 ### After (Native Linux)
+
 - ✅ Proper project structure
 - ✅ No Docker required
 - ✅ Native Linux application

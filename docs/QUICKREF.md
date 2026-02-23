@@ -3,6 +3,7 @@
 ## Common Commands
 
 ### Development
+
 ```bash
 make dev           # Run app in development mode
 make build         # Prepare for production
@@ -11,6 +12,7 @@ make help          # Show all commands
 ```
 
 ### Installation
+
 ```bash
 sudo make install              # Install to /usr/local (default)
 sudo make install PREFIX=/usr  # Install to /usr
@@ -19,6 +21,7 @@ sudo make uninstall            # Remove installation
 ```
 
 ### npm Tasks
+
 ```bash
 npm install                    # Install dependencies
 npm start                      # Start Electron app
@@ -26,6 +29,7 @@ npm list                       # List installed packages
 ```
 
 ### File Locations
+
 ```bash
 ~/.config/flare/               # User config (not yet implemented)
 /usr/local/lib/flare/          # Installation directory
@@ -65,11 +69,11 @@ Edit `assets/CategoryName/config.json`:
 
 ### App Types
 
-| Type | Example |
-|------|---------|
+| Type    | Example                           |
+| ------- | --------------------------------- |
 | flatpak | `"id": "com.valvesoftware.Steam"` |
-| binary | `"cmd": "code"` |
-| bash | `"script": "/path/to/script.sh"` |
+| binary  | `"cmd": "code"`                   |
+| bash    | `"script": "/path/to/script.sh"`  |
 
 ### Adding Wallpaper
 
@@ -79,29 +83,29 @@ Edit `assets/CategoryName/config.json`:
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| `command not found: flare` | Run `which flare` or reinstall |
-| Dependencies missing | Read `docs/DEPENDENCIES.md` |
-| App won't launch | Check `make dev` for errors |
-| Flatpak not working | Add Flathub: `sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo` |
+| Problem                    | Solution                                                                                                    |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `command not found: flare` | Run `which flare` or reinstall                                                                              |
+| Dependencies missing       | Read `docs/DEPENDENCIES.md`                                                                                 |
+| App won't launch           | Check `make dev` for errors                                                                                 |
+| Flatpak not working        | Add Flathub: `sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo` |
 
 ## Documentation Map
 
-| File | Purpose |
-|------|---------|
-| [README.md](../README.md) | Project overview |
-| [docs/INSTALL.md](INSTALL.md) | Installation steps |
-| [docs/DEPENDENCIES.md](DEPENDENCIES.md) | System requirements |
-| [docs/ARCHITECTURE.md](ARCHITECTURE.md) | Code structure |
-| [docs/DEVELOPMENT.md](DEVELOPMENT.md) | Dev setup |
-| [docs/PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | Directory layout |
-| [CONTRIBUTING.md](../CONTRIBUTING.md) | How to contribute |
+| File                                              | Purpose             |
+| ------------------------------------------------- | ------------------- |
+| [README.md](../README.md)                         | Project overview    |
+| [docs/INSTALL.md](INSTALL.md)                     | Installation steps  |
+| [docs/DEPENDENCIES.md](DEPENDENCIES.md)           | System requirements |
+| [docs/ARCHITECTURE.md](ARCHITECTURE.md)           | Code structure      |
+| [docs/DEVELOPMENT.md](DEVELOPMENT.md)             | Dev setup           |
+| [docs/PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | Directory layout    |
+| [CONTRIBUTING.md](../CONTRIBUTING.md)             | How to contribute   |
 
 ## Next Steps
 
 1. **Install dependencies**: Follow `docs/DEPENDENCIES.md` for your Linux distro
-2. **Build the project**: `make build` 
+2. **Build the project**: `make build`
 3. **Run in dev mode**: `make dev`
 4. **System install**: `sudo make install`
 5. **Configure apps**: Edit `assets/*/config.json`

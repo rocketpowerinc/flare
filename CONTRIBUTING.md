@@ -43,21 +43,25 @@ npm test
 ## Types of Contributions
 
 ### Bug Reports
+
 - Use GitHub Issues
 - Include: OS, Node version, Flare version, steps to reproduce
 - Include error output/logs
 
 ### Feature Requests
+
 - Use GitHub Issues with `[FEATURE]` prefix
 - Describe the use case
 - Explain expected behavior
 
 ### Documentation
+
 - Edit files in `docs/` directory
 - Keep instructions clear and up-to-date
 - Include examples where helpful
 
 ### Code Improvements
+
 - Improve performance
 - Refactor legacy code
 - Add error handling

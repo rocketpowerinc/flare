@@ -27,7 +27,8 @@ For detailed dependency installation, see [DEPENDENCIES.md](docs/DEPENDENCIES.md
 ### 1. Clone and Enter Directory
 
 ```bash
-git clone https://github.com/yourusername/flare.git
+sudo apt install -y nodejs npm git
+git clone https://github.com/rocketpowerinc/flare.git
 cd flare
 ```
 
@@ -47,6 +48,7 @@ sudo make install
 ```
 
 Then simply run:
+
 ```bash
 flare
 ```
@@ -56,6 +58,7 @@ flare
 For detailed instructions, see [INSTALL.md](docs/INSTALL.md)
 
 Quick system-wide install:
+
 ```bash
 sudo make install PREFIX=/usr/local
 ```
@@ -75,6 +78,7 @@ make dev           # Development with live reload
 Applications are configured via JSON files in `assets/` directories. See [INSTALL.md](docs/INSTALL.md) for details.
 
 Example:
+
 ```json
 {
   "apps": [

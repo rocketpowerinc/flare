@@ -31,6 +31,7 @@ assets/                # Category configurations
 ### Changing the UI
 
 Edit `src/ui/index.html`:
+
 - CSS Styles: Modify the `<style>` block
 - HTML: Modify the markup
 - JavaScript: Import additional scripts in `<script>` tag
@@ -65,6 +66,7 @@ To add a new type, add a new condition here.
 ### Modifying Main Process
 
 Edit `src/main.js` for:
+
 - Window size/properties
 - Menu items
 - IPC handlers
@@ -100,6 +102,7 @@ sudo make uninstall
 ### Enable DevTools
 
 Modify `src/main.js`:
+
 ```javascript
 function createWindow() {
   // ...
@@ -116,6 +119,7 @@ make dev 2>&1 | tee debug.log
 ### Check App Paths
 
 In `src/AppLauncher.js`:
+
 ```javascript
 console.log("Category:", category);
 console.log("Apps:", category.apps);
@@ -197,6 +201,7 @@ kill -9 PID    # Kill the process
 ### Electron not launching
 
 Check Node.js version:
+
 ```bash
 node --version  # Should be 18+
 ```
@@ -204,6 +209,7 @@ node --version  # Should be 18+
 ### Path issues in Linux
 
 Use absolute paths in configs:
+
 ```json
 "script": "/home/user/exact/path/to/script.sh"
 ```

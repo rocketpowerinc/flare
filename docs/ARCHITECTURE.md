@@ -64,20 +64,22 @@ Render app cards in grid
 ## App Configuration
 
 Each category has:
+
 - **config.json**: List of apps with metadata
 - **wallpaper.png**: Background image (1920x1080+)
 
 Config structure:
+
 ```json
 {
   "apps": [
     {
       "name": "Display name",
       "type": "flatpak|binary|bash",
-      "id": "com.example.app",      // (flatpak only)
-      "cmd": "binary-name",          // (binary only)
-      "script": "/path/to/script",   // (bash only)
-      "website": "https://..."       // (optional, for context menu)
+      "id": "com.example.app", // (flatpak only)
+      "cmd": "binary-name", // (binary only)
+      "script": "/path/to/script", // (bash only)
+      "website": "https://..." // (optional, for context menu)
     }
   ]
 }
