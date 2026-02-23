@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flare - Ultimate Launcher</title>
+<style>
+html, body { 
+  height:100%; 
+  margin:0; 
+  overflow:hidden; 
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color:white;
+  background-size:cover;
+  background-position:center;
+  transition: background-image 0.4s ease;
+}
+
+.topbar {
+  height:35px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  background:rgba(0,0,0,0.8);
+}
+
+.window-btn {
+  width:45px;
+  height:100%;
+  border:none;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.window-btn:hover { 
+  background:rgba(255,255,255,0.2); 
+}
+
+.close-btn:hover { 
+  background:#e81123; 
+}
+
+.sidebar {
+  position:absolute;
+  left:0; 
+  top:35px;
+  width:220px;
+  height:calc(100% - 35px);
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(15px);
+  display:flex;
+  flex-direction:column;
+  transition: width 0.3s ease;
+  overflow-y:auto;
+}
+
+.sidebar.collapsed { 
+  width:60px; 
+}
+
+.hamburger {
+  padding:20px;
+  background:none;
+  border:none;
+  color:white;
+  font-size:20px;
+  text-align:left;
+  cursor:pointer;
+}
+
+#category-list {
+  display:flex;
+  flex-direction:column;
+}
+
+.category-btn {
+  background:none;
+  border:none;
+  color:white;
+  padding:15px 20px;
+  text-align:left;
+  cursor:pointer;
+  font-size:16px;
+  white-space:nowrap;
+  overflow:hidden;
+  transition:background 0.2s;
+}
+
+.category-btn:hover {
+  background:rgba(255,255,255,0.1);
+}
+
+.sidebar.collapsed .category-text {
+  display:none;
+}
+
+.content-area {
+  margin-left:220px;
+  height:calc(100% - 35px);
+  padding:40px;
+  transition: margin-left 0.3s ease;
+  overflow-y:auto;
+}
+
+.content-area.shifted { 
+  margin-left:60px; 
+}
+
+.apps-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:25px;
+}
+
+.app-card {
+  background:rgba(0,0,0,0.5);
+  padding:30px;
+  text-align:center;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s ease;
+  position:relative;
+  border:2px solid transparent;
+  user-select:none;
+}
+
+.app-card:hover {
+  transform:translateY(-5px);
+  background:rgba(255,255,255,0.15);
+}
+
+/* Installed apps - green/success state */
+.app-card.installed {
+  border-color:rgba(34,177,76,0.6);
+  background:rgba(34,177,76,0.1);
+}
+
+.app-card.installed:hover {
+  background:rgba(34,177,76,0.25);
+  border-color:rgba(34,177,76,1);
+}
+
+/* Not installed apps - subtle gray state */
+.app-card.not-installed {
+  border-color:rgba(150,150,150,0.4);
+  background:rgba(100,100,100,0.1);
+  opacity:0.75;
+}
+
+.app-card.not-installed:hover {
+  background:rgba(100,100,100,0.2);
+  opacity:1;
+}
+
+/* Installing apps - disabled/loading state */
+.app-card.installing {
+  border-color:rgba(255,193,7,0.8);
+  background:rgba(255,193,7,0.1);
+  cursor:not-allowed;
+  pointer-events:none;
+}
+
+.app-card.installing .app-status::before {
+  content:"";
+  display:inline-block;
+  width:20px;
+  height:20px;
+  border:3px solid rgba(255,193,7,0.3);
+  border-top-color:rgba(255,193,7,1);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin-top:10px;
+}
+
+@keyframes spin {
+  to { transform:rotate(360deg); }
+}
+
+.app-name {
+  font-weight:500;
+  font-size:16px;
+}
+
+.app-status {
+  font-size:12px;
+  margin-top:8px;
+  min-height:20px;
+}
+
+.app-icon {
+  width:64px;
+  height:64px;
+  object-fit:contain;
+  margin-bottom:12px;
+  opacity:0.9;
+  transition:opacity 0.3s ease;
+}
+
+.app-card:hover .app-icon {
+  opacity:1;
+}
+
+/* Context Menu */
+.context-menu {
+  position:fixed;
+  background:rgba(0,0,0,0.95);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:6px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  z-index:1000;
+  min-width:200px;
+  display:none;
+}
+
+.context-menu.show {
+  display:block;
+}
+
+.context-menu-item {
+  padding:10px 16px;
+  color:white;
+  cursor:pointer;
+  border:none;
+  background:none;
+  width:100%;
+  text-align:left;
+  font-size:14px;
+  transition:background 0.2s;
+}
+
+.context-menu-item:hover {
+  background:rgba(255,255,255,0.1);
+}
+
+.context-menu-separator {
+  height:1px;
+  background:rgba(255,255,255,0.1);
+  margin:4px 0;
+}
+
+/* Info Toast */
+.info-toast {
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  background:rgba(0,0,0,0.9);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:8px;
+  padding:20px 30px;
+  color:white;
+  font-size:16px;
+  text-align:center;
+  z-index:2000;
+  display:none;
+}
+
+.info-toast.show {
+  display:block;
+  animation:fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity:0; }
+  20%, 80% { opacity:1; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="window-btn" title="Refresh">🔄</button>
+  <button class="window-btn close-btn" onclick="closeApp()" title="Close">✕</button>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <button class="hamburger" onclick="toggleSidebar()" title="Toggle Sidebar">☰</button>
+  <div id="category-list"></div>
+</div>
+
+<div class="content-area" id="content-area">
+  <div class="apps-grid" id="apps-grid"></div>
+</div>
+
+<div class="context-menu" id="context-menu">
+  <button class="context-menu-item" id="open-website-btn">Open Official Website</button>
+  <div class="context-menu-separator"></div>
+  <button class="context-menu-item" id="remove-app-btn" style="display:none;">Remove App (Simulated)</button>
+</div>
+
+<div class="info-toast" id="info-toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
