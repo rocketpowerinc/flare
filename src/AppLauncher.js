@@ -8,15 +8,54 @@ const appsGrid = document.getElementById("apps-grid");
 const sidebar = document.getElementById("sidebar");
 const contentArea = document.getElementById("content-area");
 
+// Track installation status of apps
+const appStatus = {};
+
 function run(cmd) { exec(cmd); }
 
-function handleApp(app) {
+function checkInstallation(app) {
+  return new Promise((resolve) => {
+    if (app.type === "flatpak") {
+      exec(`flatpak info ${app.id}`, (err) => {
+        resolve(!err);
+      });
+    } else {
+      resolve(true);
+    }
+  });
+}
+
+function updateCardStatus(card, status) {
+  card.classList.remove("installed", "installing", "not-installed");
+  card.classList.add(status);
+}
+
+function handleApp(app, card) {
+  if (appStatus[app.id] === "installing") return;
+
   if (app.type === "flatpak") {
     exec(`flatpak info ${app.id}`, (err) => {
       if (err) {
+        // App not installed, start installation
+        updateCardStatus(card, "installing");
+        appStatus[app.id] = "installing";
+        card.style.pointerEvents = "none";
+        card.style.opacity = "0.6";
+
         run(`flatpak install flathub ${app.id} -y`);
-        setTimeout(() => run(`flatpak run ${app.id}`), 4000);
+        setTimeout(() => {
+          updateCardStatus(card, "installed");
+          appStatus[app.id] = "installed";
+          card.style.pointerEvents = "auto";
+          card.style.opacity = "1";
+          run(`flatpak run ${app.id}`);
+        }, 4000);
       } else {
+        // App already installed
+        appStatus[app.id] = "installed";
+        updateCardStatus(card, "installed");
+        card.style.pointerEvents = "auto";
+        card.style.opacity = "1";
         run(`flatpak run ${app.id}`);
       }
     });
@@ -36,9 +75,21 @@ function loadCategory(category) {
   category.apps.forEach(app => {
     const card = document.createElement("div");
     card.className = "app-card";
-    card.innerHTML = `<div>${app.name}</div>`;
+    card.innerHTML = `<div class="app-name">${app.name}</div><div class="app-status"></div>`;
 
-    card.onclick = () => handleApp(app);
+    // Check installation status
+    checkInstallation(app).then(isInstalled => {
+      if (isInstalled) {
+        appStatus[app.id] = "installed";
+        updateCardStatus(card, "installed");
+        card.style.opacity = "1";
+      } else {
+        appStatus[app.id] = "not-installed";
+        updateCardStatus(card, "not-installed");
+      }
+    });
+
+    card.onclick = () => handleApp(app, card);
 
     card.oncontextmenu = (e) => {
       e.preventDefault();
