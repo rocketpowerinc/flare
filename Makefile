@@ -30,7 +30,7 @@ build: deps
 
 deps:
 	@echo "📦 Installing Node.js dependencies..."
-	npm install --no-save 2>/dev/null || npm install --save-dev electron
+	npm install
 
 dev: deps
 	@echo "🚀 Starting Flare in development mode..."
