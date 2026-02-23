@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name": "VS Code",
+      "type": "flatpak",
+      "id": "com.visualstudio.code",
+      "website": "https://flathub.org/apps/com.visualstudio.code"
+    },
+    {
+      "name": "GNOME Text Editor",
+      "type": "flatpak",
+      "id": "org.gnome.TextEditor",
+      "website": "https://flathub.org/apps/org.gnome.TextEditor"
+    },
+    {
+      "name": "Git Kraken",
+      "type": "flatpak",
+      "id": "com.gitkraken.GitKraken",
+      "website": "https://flathub.org/apps/com.gitkraken.GitKraken"
+    }
+  ]
+}

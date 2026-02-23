@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Flare - Ultimate Launcher</title>
+<style>
+html, body { height:100%; margin:0; overflow:hidden; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color:white;
+  background-size:cover;
+  background-position:center;
+  transition: background-image 0.4s ease;
+}
+
+.topbar {
+  height:35px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  background:rgba(0,0,0,0.8);
+  -webkit-app-region: drag;
+}
+
+.window-btn {
+  width:45px;
+  height:100%;
+  border:none;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  -webkit-app-region:no-drag;
+}
+
+.window-btn:hover { background:rgba(255,255,255,0.2); }
+.close-btn:hover { background:#e81123; }
+
+.sidebar {
+  position:absolute;
+  left:0; top:35px;
+  width:220px;
+  height:calc(100% - 35px);
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(15px);
+  display:flex;
+  flex-direction:column;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed { width:60px; }
+
+.hamburger {
+  padding:20px;
+  background:none;
+  border:none;
+  color:white;
+  font-size:20px;
+  text-align:left;
+  cursor:pointer;
+}
+
+/* STACKED BUTTON FIX */
+#category-list {
+  display:flex;
+  flex-direction:column;
+}
+
+.category-btn {
+  background:none;
+  border:none;
+  color:white;
+  padding:15px 20px;
+  text-align:left;
+  cursor:pointer;
+  font-size:16px;
+  white-space:nowrap;
+  overflow:hidden;
+  transition:background 0.2s;
+}
+
+.category-btn:hover {
+  background:rgba(255,255,255,0.1);
+}
+
+.sidebar.collapsed .category-text {
+  display:none;
+}
+
+.content-area {
+  margin-left:220px;
+  height:calc(100% - 35px);
+  padding:40px;
+  transition: margin-left 0.3s ease;
+}
+
+.content-area.shifted { margin-left:60px; }
+
+.apps-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:25px;
+}
+
+.app-card {
+  background:rgba(0,0,0,0.5);
+  padding:30px;
+  text-align:center;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s ease;
+}
+
+.app-card:hover {
+  transform:translateY(-5px);
+  background:rgba(255,255,255,0.15);
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="window-btn" onclick="minimize()">—</button>
+  <button class="window-btn" id="maxBtn" onclick="toggleMax()">▢</button>
+  <button class="window-btn close-btn" onclick="closeApp()">✕</button>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+  <div id="category-list"></div>
+</div>
+
+<div class="content-area" id="content-area">
+  <div class="apps-grid" id="apps-grid"></div>
+</div>
+
+<script src="../AppLauncher.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Flare
+Comment=Ultimate Linux Launcher
+Icon=application-x-executable
+Exec=flare
+Type=Application
+Categories=Utility;
+Terminal=false

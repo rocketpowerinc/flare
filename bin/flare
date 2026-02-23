@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Flare - Ultimate Linux Launcher
+# Main entry point script
+
+set -e
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+# Change to project root
+cd "$PROJECT_ROOT"
+
+# Ensure dependencies are installed
+if [ ! -d "node_modules" ]; then
+    echo "📦 Installing Node.js dependencies..."
+    npm install --no-save
+fi
+
+# Launch the app
+exec npx electron "$PROJECT_ROOT/src/main.js" "$@"

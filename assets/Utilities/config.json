@@ -1,0 +1,21 @@
+{
+  "apps": [
+    {
+      "name": "GNOME Settings",
+      "type": "flatpak",
+      "id": "org.gnome.Settings",
+      "website": "https://flathub.org/apps/org.gnome.Settings"
+    },
+    {
+      "name": "Files",
+      "type": "flatpak",
+      "id": "org.gnome.Nautilus",
+      "website": "https://flathub.org/apps/org.gnome.Nautilus"
+    },
+    {
+      "name": "System Monitor",
+      "type": "binary",
+      "cmd": "gnome-system-monitor"
+    }
+  ]
+}

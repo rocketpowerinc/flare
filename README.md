@@ -1,1 +1,142 @@
-# flare
+# Flare - Ultimate Linux Launcher
+
+A modern, lightweight Electron-based application launcher for Linux with built-in Flatpak support.
+
+**Flare** is designed to provide an elegant interface for organizing and launching your applications across different categories. It features a collapsible sidebar, dynamic wallpapers per category, and seamless integration with Flatpak applications.
+
+## Features
+
+✨ **Modern UI** - Clean, dark-themed interface with category-based organization
+📦 **Flatpak Support** - Directly launch and manage Flatpak applications
+🎨 **Dynamic Wallpapers** - Different backgrounds for each category
+⚡ **Lightweight** - Fast, responsive Electron app
+🎯 **Easy Configuration** - JSON-based config for managing apps
+🛠️ **Native Linux** - Builds natively on Linux without Docker
+
+## Prerequisites
+
+- **Node.js** 18.0.0+ and **npm** 9.0.0+
+- **Flatpak** (optional, for Flatpak app support)
+- **Make** (for building and installation)
+- Linux distribution (Ubuntu 20.04+, Fedora 35+, Arch, etc.)
+
+For detailed dependency installation, see [DEPENDENCIES.md](docs/DEPENDENCIES.md)
+
+## Quick Start
+
+### 1. Clone and Enter Directory
+
+```bash
+git clone https://github.com/yourusername/flare.git
+cd flare
+```
+
+### 2. Run in Development Mode
+
+```bash
+make dev
+```
+
+This will install Node.js dependencies and launch Electron with the app.
+
+### 3. Install System-Wide
+
+```bash
+make build
+sudo make install
+```
+
+Then simply run:
+```bash
+flare
+```
+
+## Installation
+
+For detailed instructions, see [INSTALL.md](docs/INSTALL.md)
+
+Quick system-wide install:
+```bash
+sudo make install PREFIX=/usr/local
+```
+
+## Usage
+
+### Starting the Application
+
+```bash
+flare              # If installed system-wide
+./bin/flare        # From project directory
+make dev           # Development with live reload
+```
+
+### Configuration
+
+Applications are configured via JSON files in `assets/` directories. See [INSTALL.md](docs/INSTALL.md) for details.
+
+Example:
+```json
+{
+  "apps": [
+    {
+      "name": "Steam",
+      "type": "flatpak",
+      "id": "com.valvesoftware.Steam",
+      "website": "https://flathub.org/apps/com.valvesoftware.Steam"
+    }
+  ]
+}
+```
+
+### App Types
+
+- **flatpak** - Flatpak applications
+- **binary** - System binaries
+- **bash** - Custom scripts
+
+## Project Structure
+
+```
+flare/
+├── bin/flare                  # Main launcher script
+├── src/
+│   ├── main.js                # Electron main process
+│   ├── AppLauncher.js         # Core logic
+│   ├── ui/index.html          # Main UI
+│   └── services/              # Service modules
+├── assets/                    # Category configs and wallpapers
+├── config/flare.desktop       # Desktop entry
+├── docs/                      # Documentation
+├── Makefile                   # Build automation
+└── package.json               # Dependencies
+```
+
+## Commands
+
+```bash
+make dev           # Development mode
+make build         # Build only
+make install       # System-wide install (requires sudo)
+make uninstall     # Remove installation
+make clean         # Clean artifacts
+make help          # Show all commands
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make improvements
+4. Submit a pull request
+
+## Troubleshooting
+
+See [INSTALL.md](docs/INSTALL.md) for detailed troubleshooting guides.
+
+## License
+
+Licensed under the MIT License - see LICENSE file for details.
+
+---
+
+**Flare** - Launch your apps with style 🔥
