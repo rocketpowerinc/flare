@@ -6,10 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "electron .",
-    "dev": "electron . --dev",
-    "build": "make build",
-    "install": "make install",
-    "uninstall": "make uninstall"
+    "dev": "electron . --dev"
   },
   "keywords": [
     "launcher",
