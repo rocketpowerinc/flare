@@ -4,7 +4,8 @@
       "name": "Steam",
       "type": "flatpak",
       "id": "com.valvesoftware.Steam",
-      "website": "https://flathub.org/apps/com.valvesoftware.Steam"
+      "website": "https://flathub.org/apps/com.valvesoftware.Steam",
+      "icon": "../assets/Games/steam.png"
     },
     {
       "name": "Lutris",
@@ -17,7 +18,8 @@
       "name": "Proton-Plus",
       "type": "flatpak",
       "id": "com.github.Matoking.protontricks",
-      "website": "https://flathub.org/apps/com.github.Matoking.protontricks"
+      "website": "https://flathub.org/apps/com.github.Matoking.protontricks",
+      "icon": "../assets/Games/proton.png"
     }
   ]
 }
