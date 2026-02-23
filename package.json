@@ -2,7 +2,7 @@
   "name": "flare",
   "version": "2.0.0",
   "description": "Ultimate Linux Launcher - A modern Electron-based application launcher for Linux with Flatpak support",
-  "main": "src/main.js",
+  "main": "main.js",
   "type": "commonjs",
   "scripts": {
     "start": "electron .",
