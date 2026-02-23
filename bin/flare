@@ -4,18 +4,25 @@
 
 set -e
 
-# Get the directory where this script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-
-# Change to project root
-cd "$PROJECT_ROOT"
+# Determine installation directory
+if [ -d "/usr/local/lib/flare" ]; then
+    APP_DIR="/usr/local/lib/flare"
+elif [ -d "/usr/lib/flare" ]; then
+    APP_DIR="/usr/lib/flare"
+else
+    # Fallback to script directory (for development)
+    SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    APP_DIR="$(dirname "$SCRIPT_DIR")"
+fi
 
 # Ensure dependencies are installed
-if [ ! -d "node_modules" ]; then
+if [ ! -d "$APP_DIR/node_modules" ]; then
     echo "📦 Installing Node.js dependencies..."
-    npm install --no-save
+    cd "$APP_DIR"
+    npm install --save-dev electron
 fi
 
 # Launch the app
-exec npx electron "$PROJECT_ROOT/src/main.js" "$@"
+cd "$APP_DIR"
+exec npx electron main.js "$@"
+
