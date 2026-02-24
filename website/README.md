@@ -76,3 +76,7 @@ Works on all modern browsers (Chrome, Firefox, Safari, Edge). Requires ES6 suppo
 - **Simulate installation** - Click not-installed apps to see the installation animation
 - **Context menu** - Right-click apps to see available options
 - **Responsive design** - Resize the browser window to test responsiveness
+
+# Run
+- `cd website`
+- `python -m http.server 8000`
