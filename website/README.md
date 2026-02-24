@@ -62,6 +62,7 @@ Modify the CSS in the `<style>` section of `index.html` to customize the appeara
 ### Loading Real Config Files
 
 To use the actual config files from the main Flare app:
+
 1. Copy config files from `../assets/` to `assets/` folder
 2. Modify `app.js` to load configs via fetch API instead of hardcoded data
 
