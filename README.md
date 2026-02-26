@@ -88,17 +88,21 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 ### Build and Test Locally
 
-Pre-install dependencies before building the Flatpak:
+Install dependencies and build the Flatpak bundle locally:
 
 ```bash
-git clone https://github.com/rocketpowerinc/flare.git
-cd flare
 npm install --omit=dev
 flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
 make flatpak
 ```
 
-> **Important:** You must run `npm install --omit=dev` BEFORE building the Flatpak. The build sandbox does not have network access to npm registry, so `node_modules` must be pre-installed and will be bundled with the app.
+Then run it:
+
+```bash
+flatpak run com.github.rocketpowerinc.flare
+```
+
+> **Important:** Run `npm install --omit=dev` first. The Flatpak build uses your local directory (including `node_modules`), since the build sandbox has no network access to npm registry.
 
 > ⚠️ **Build error troubleshooting**
 >

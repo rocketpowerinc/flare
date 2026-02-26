@@ -5,18 +5,24 @@
 set -e
 
 # Determine installation directory
-if [ -d "/usr/local/lib/flare" ]; then
+if [ -d "/app/lib/flare" ]; then
+    APP_DIR="/app/lib/flare"
+    IS_FLATPAK=true
+elif [ -d "/usr/local/lib/flare" ]; then
     APP_DIR="/usr/local/lib/flare"
+    IS_FLATPAK=false
 elif [ -d "/usr/lib/flare" ]; then
     APP_DIR="/usr/lib/flare"
+    IS_FLATPAK=false
 else
     # Fallback to script directory (for development)
     SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     APP_DIR="$(dirname "$SCRIPT_DIR")"
+    IS_FLATPAK=false
 fi
 
-# Ensure dependencies are installed
-if [ ! -d "$APP_DIR/node_modules" ]; then
+# Ensure dependencies are installed (skip for Flatpak, where they're bundled)
+if [ ! -d "$APP_DIR/node_modules" ] && [ "$IS_FLATPAK" != "true" ]; then
     echo "📦 Installing Node.js dependencies..."
     cd "$APP_DIR"
     npm install --save-dev electron
