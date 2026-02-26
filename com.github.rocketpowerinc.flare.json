@@ -33,6 +33,11 @@
     {
       "name": "flare",
       "buildsystem": "simple",
+      "build-options": {
+        "env": {
+          "npm_config_nodedir": "/app"
+        }
+      },
       "build-commands": [
         "npm install --omit=dev",
         "mkdir -p /app/bin /app/lib/flare",

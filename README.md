@@ -108,6 +108,8 @@ make flatpak
 > make flatpak
 > ```
 >
+> **npm install errors (EAI_AGAIN):** If you see network errors like `request to https://registry.npmjs.org failed`, the Flatpak build needs network access. Update to the latest `com.github.rocketpowerinc.flare.json` which includes proper build environment configuration.
+>
 > **npm ci errors:** If you see `npm ERR! The npm ci command can only install with an existing package-lock.json`, update to the latest `com.github.rocketpowerinc.flare.json` which uses `npm install --omit=dev` instead.
 >
 > If you see an error like `cp: cannot stat 'node-v18.20.1-linux-x64/*': No such file or directory`,
