@@ -100,18 +100,23 @@ make flatpak
 
 > ⚠️ **Build error troubleshooting**
 >
-> If you see an error like `cp: cannot stat 'node-v18.20.1-linux-x64/*': No such file or directory`,
-> the Node archive has already been extracted and the top‑level directory name may differ.
-> Updating the `nodejs` module in `com.github.rocketpowerinc.flare.json` to copy all
-> contents fixes this; the repository already includes the corrected command:
+> If you encounter a Flatpak build error, ensure you have the latest code and clean build cache:
 >
-> ```json
-> "build-commands": [
->     "cp -r * /usr/local/"
-> ],
+> ```bash
+> git pull origin main
+> rm -rf build-flatpak ~/.local/share/flatpak/staging
+> make flatpak
 > ```
 >
-> Afterwards rerun `make flatpak` or the equivalent `flatpak-builder` invocation.
+> **npm ci errors:** If you see `npm ERR! The npm ci command can only install with an existing package-lock.json`, update to the latest `com.github.rocketpowerinc.flare.json` which uses `npm install --omit=dev` instead.
+>
+> If you see an error like `cp: cannot stat 'node-v18.20.1-linux-x64/*': No such file or directory`,
+> the Node archive has already been extracted and the top‑level directory name may differ.
+> The repository includes the corrected build command that copies Node.js to `/app` instead of `/usr/local/`:
+>
+> ```json
+> "build-commands": ["mkdir -p /app", "cp -r * /app/"]
+> ```
 
 ````
 
