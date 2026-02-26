@@ -78,20 +78,24 @@ See https://docs.flathub.org/docs/for-app-authors for detailed instructions.
 ## Troubleshooting
 
 ### Build fails with Node.js issues
+
 - Ensure the Node 18 SDK extension is available
 - Check logs: `flatpak-builder` outputs detailed error messages
 
 ### App won't launch
+
 - Check permissions in finish-args
 - View logs: `flatpak run --command=sh com.github.rocketpowerinc.flare`
 
 ### Flatpak not found
+
 - Verify installation: `flatpak list`
 - Rebuild: `flatpak-builder --install --force-clean build-dir flatpak.yaml`
 
 ## Configuration
 
 The manifest includes:
+
 - **Permissions**: Network access, wayland/X11 sockets, home filesystem access (for app configs)
 - **Runtime**: GNOME Platform 46 with Node.js 18 SDK extension
 - **Build process**: npm dependency installation and app setup
