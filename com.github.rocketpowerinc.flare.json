@@ -22,7 +22,6 @@
       "name": "nodejs",
       "buildsystem": "simple",
       "build-commands": [
-        // the archive is unpacked by flatpak-builder; copy everything to /usr/local
         "cp -r * /usr/local/"
       ],
       "sources": [
