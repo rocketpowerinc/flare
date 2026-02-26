@@ -3,7 +3,7 @@
   "runtime": "org.gnome.Platform",
   "runtime-version": "46",
   "sdk": "org.gnome.Sdk",
-  "sdk-extensions": ["org.freedesktop.Sdk.Extension.node18"],
+  "sdk-extensions": ["org.freedesktop.Sdk.Extension.node20"],
   "command": "flare",
   "finish-args": [
     "--share=network",
@@ -18,10 +18,10 @@
     "--allow=devel"
   ],
   "build-options": {
-    "append-path": "/usr/lib/sdk/node18/bin",
-    "append-ld-library-path": "/usr/lib/sdk/node18/lib",
+    "append-path": "/usr/lib/sdk/node20/bin",
+    "append-ld-library-path": "/usr/lib/sdk/node20/lib",
     "env": {
-      "npm_config_nodedir": "/usr/lib/sdk/node18"
+      "npm_config_nodedir": "/usr/lib/sdk/node20"
     }
   },
   "modules": [
