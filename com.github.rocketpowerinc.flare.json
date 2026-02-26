@@ -22,7 +22,6 @@
       "name": "nodejs",
       "buildsystem": "simple",
       "build-commands": [
-        "tar -xJf node-v18.20.1-linux-x64.tar.xz",
         "cp -r node-v18.20.1-linux-x64/* /usr/local/"
       ],
       "sources": [
