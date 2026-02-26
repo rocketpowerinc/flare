@@ -1,7 +1,14 @@
 const { exec } = require("child_process");
 const { ipcRenderer } = require("electron");
 const path = require("path");
-const { getCategories } = require(path.join(__dirname, "services", "categoryService"));
+let getCategories;
+try {
+  getCategories = require(path.join(__dirname, "services", "categoryService")).getCategories;
+} catch (e) {
+  // When AppLauncher.js is loaded from `src/ui/index.html` as a script tag,
+  // `__dirname` may resolve to `src/ui`. Fall back to the parent `src` folder.
+  getCategories = require(path.join(__dirname, "..", "services", "categoryService")).getCategories;
+}
 
 const categories = getCategories();
 const categoryList = document.getElementById("category-list");
