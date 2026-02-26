@@ -21,6 +21,11 @@ else
     IS_FLATPAK=false
 fi
 
+# Flatpak: disable SUID sandbox and use wayland
+if [ "$IS_FLATPAK" = "true" ]; then
+    export ELECTRON_OZONE_PLATFORM_HINT=wayland
+fi
+
 # Ensure dependencies are installed (skip for Flatpak, where they're bundled)
 if [ ! -d "$APP_DIR/node_modules" ] && [ "$IS_FLATPAK" != "true" ]; then
     echo "📦 Installing Node.js dependencies..."
