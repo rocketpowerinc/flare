@@ -17,8 +17,10 @@ function createWindow() {
   });
 
   win.loadFile(path.join(__dirname, "src/index.html"));
-  // Open DevTools in packaged builds to help debug renderer issues (Flatpak)
-  try { win.webContents.openDevTools(); } catch (e) { /* ignore */ }
+  // Open DevTools only when explicitly requested via env var
+  if (process.env.OPEN_DEVTOOLS === "true") {
+    try { win.webContents.openDevTools(); } catch (e) { /* ignore */ }
+  }
 }
 
 app.whenReady().then(createWindow);

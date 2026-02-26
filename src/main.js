@@ -17,7 +17,9 @@ function createWindow() {
   });
 
   win.loadFile(path.join(__dirname, "ui/index.html"));
-  win.webContents.openDevTools();
+  if (process.env.OPEN_DEVTOOLS === "true") {
+    try { win.webContents.openDevTools(); } catch (e) { /* ignore */ }
+  }
 }
 
 app.whenReady().then(createWindow);
