@@ -91,6 +91,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 Build and install the Flatpak locally:
 
 ```bash
+flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46
 git clone https://github.com/rocketpowerinc/flare.git
 cd flare
 make flatpak
