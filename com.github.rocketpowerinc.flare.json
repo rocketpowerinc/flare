@@ -21,9 +21,7 @@
     {
       "name": "nodejs",
       "buildsystem": "simple",
-      "build-commands": [
-        "cp -r node-v18.20.1-linux-x64/* /usr/local/"
-      ],
+      "build-commands": ["cp -r node-v18.20.1-linux-x64/* /usr/local/"],
       "sources": [
         {
           "type": "archive",
