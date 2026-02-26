@@ -63,121 +63,6 @@ Quick system-wide install:
 sudo make install PREFIX=/usr/local
 ```
 
-## Building as Flatpak
-
-Flare can be packaged and distributed as a Flatpak for simple installation across different Linux distributions.
-
-### Prerequisites for Flatpak Builds
-
-```bash
-# Fedora
-sudo dnf install flatpak flatpak-builder
-
-# Ubuntu/Debian
-sudo apt install flatpak flatpak-builder
-
-# Arch
-sudo pacman -S flatpak flatpak-builder
-```
-
-Add the Flathub repository:
-
-```bash
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-```
-
-### Build and Test Locally
-
-Install dependencies in your repository directory, then build the Flatpak:
-
-```bash
-git clone https://github.com/rocketpowerinc/flare.git
-cd flare
-npm install --omit=dev
-flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
-rm -rf build-flatpak ~/.local/share/flatpak/staging
-make flatpak
-```
-
-Then run:
-
-```bash
-flatpak run com.github.rocketpowerinc.flare
-```
-
-> **Important:**
->
-> - Run `npm install --omit=dev` in your repository directory **before** running `make flatpak`
-> - The Flatpak build uses your local directory, so `node_modules` must exist locally
-> - The build sandbox has no network access, dependencies are bundled from your local `node_modules`
-
-> ⚠️ **Build error troubleshooting**
->
-> **node_modules not found error:** If the build fails with "node_modules not found", ensure you:
->
-> ```bash
-> npm install --omit=dev
-> git add -f node_modules/
-> git commit -m "Add node_modules"
-> git push origin main
-> rm -rf build-flatpak ~/.local/share/flatpak/staging
-> make flatpak
-> ```
->
-> **Electron sandbox errors at runtime:** If you see SUID sandbox errors, the `node_modules` wasn't bundled properly. Verify it's in git:
->
-> ```bash
-> ls -la /app/lib/flare/node_modules  # Inside Flatpak
-> ```
->
-> If you see an error like `cp: cannot stat 'node-v18.20.1-linux-x64/*': No such file or directory`,
-> the Node archive has already been extracted. The repository includes the corrected build command that copies Node.js to `/app` instead of `/usr/local/`:
->
-> ```json
-> "build-commands": ["mkdir -p /app", "cp -r * /app/"]
-> ```
-
-````
-
-or directly:
-
-```bash
-flatpak-builder --user --install --force-clean build-flatpak com.github.rocketpowerinc.flare.json
-````
-
-Then run:
-
-```bash
-flatpak run com.github.rocketpowerinc.flare
-```
-
-### Create a Distributable Bundle
-
-Generate a `.flatpak` file to share with others:
-
-```bash
-make flatpak-bundle
-```
-
-This creates `flare.flatpak` which can be installed by others with:
-
-```bash
-flatpak install flare.flatpak
-flatpak run com.github.rocketpowerinc.flare
-```
-
-### Publish to Flathub
-
-To submit Flare to Flathub for public distribution:
-
-1. Fork https://github.com/flathub/flathub
-2. Create a folder `com.github.rocketpowerinc.flare/`
-3. Copy `com.github.rocketpowerinc.flare.json` to that folder
-4. Submit a pull request
-5. Follow [Flathub submission guidelines](https://docs.flathub.org/docs/for-app-authors)
-
-For more details, see [FLATPAK.md](docs/FLATPAK.md)
-
 ## Usage
 
 ### Starting the Application
@@ -237,8 +122,6 @@ make dev           # Development mode
 make build         # Build only
 make install       # System-wide install (requires sudo)
 make uninstall     # Remove installation
-make flatpak       # Build and install as Flatpak
-make flatpak-bundle # Create distributable Flatpak bundle
 make clean         # Clean artifacts
 make help          # Show all commands
 ```
