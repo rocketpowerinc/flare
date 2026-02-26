@@ -112,13 +112,14 @@ make flatpak
 > ```
 >
 > Afterwards rerun `make flatpak` or the equivalent `flatpak-builder` invocation.
-```
+
+````
 
 or directly:
 
 ```bash
 flatpak-builder --user --install --force-clean build-flatpak com.github.rocketpowerinc.flare.json
-```
+````
 
 Then run:
 
