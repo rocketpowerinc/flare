@@ -35,6 +35,7 @@
       "build-commands": [
         "mkdir -p /app/bin /app/lib/flare",
         "cp -r . /app/lib/flare/",
+        "chmod +x /app/lib/flare/bin/flare",
         "cat > /app/bin/flare << 'EOF'\n#!/bin/bash\nexec /app/lib/flare/bin/flare \"$@\"\nEOF",
         "chmod +x /app/bin/flare"
       ],
