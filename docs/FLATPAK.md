@@ -80,6 +80,10 @@ See https://docs.flathub.org/docs/for-app-authors for detailed instructions.
 ### Build fails with Node.js issues
 
 - Ensure the Node 18 SDK extension is available
+- If you see a `cp: cannot stat 'node-v18.20.1-linux-x64/*'` error, the
+  versioned directory may not exist after extraction. The manifest now copies
+  all files (`cp -r * /usr/local/`) instead of relying on the specific
+  directory name.
 - Check logs: `flatpak-builder` outputs detailed error messages
 
 ### App won't launch

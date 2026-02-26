@@ -92,9 +92,26 @@ Build and install the Flatpak locally:
 
 ```bash
 flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
+# (or use the direct flatpak-builder command below)
 git clone https://github.com/rocketpowerinc/flare.git
 cd flare
 make flatpak
+```
+
+> ⚠️ **Build error troubleshooting**
+>
+> If you see an error like `cp: cannot stat 'node-v18.20.1-linux-x64/*': No such file or directory`,
+> the Node archive has already been extracted and the top‑level directory name may differ.
+> Updating the `nodejs` module in `com.github.rocketpowerinc.flare.json` to copy all
+> contents fixes this; the repository already includes the corrected command:
+>
+> ```json
+> "build-commands": [
+>     "cp -r * /usr/local/"
+> ],
+> ```
+>
+> Afterwards rerun `make flatpak` or the equivalent `flatpak-builder` invocation.
 ```
 
 or directly:
