@@ -21,10 +21,7 @@
     {
       "name": "nodejs",
       "buildsystem": "simple",
-      "build-commands": [
-        "mkdir -p /app",
-        "cp -r * /app/"
-      ],
+      "build-commands": ["mkdir -p /app", "cp -r * /app/"],
       "sources": [
         {
           "type": "archive",
