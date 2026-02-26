@@ -14,8 +14,7 @@
     "--device=dri",
     "--filesystem=home",
     "--filesystem=/run/user",
-    "--talk-to-name=org.freedesktop.Flatpak",
-    "--allow=devel"
+    "--system-talk-name=org.freedesktop.Flatpak"
   ],
   "modules": [
     {
