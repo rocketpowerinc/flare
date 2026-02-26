@@ -22,14 +22,16 @@
       "name": "nodejs",
       "buildsystem": "simple",
       "build-commands": [
-        "NODE_VERSION=18.20.1",
-        "ARCH=x64",
-        "curl -fsSL https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz -o /tmp/node.tar.xz",
-        "tar -xJf /tmp/node.tar.xz -C /tmp",
-        "cp -r /tmp/node-v$NODE_VERSION-linux-$ARCH/* /usr/local/",
-        "rm /tmp/node.tar.xz"
+        "tar -xJf node-v18.20.1-linux-x64.tar.xz",
+        "cp -r node-v18.20.1-linux-x64/* /usr/local/"
       ],
-      "sources": []
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://nodejs.org/dist/v18.20.1/node-v18.20.1-linux-x64.tar.xz",
+          "sha256": "5d21b924bfbe25a5fd96c2b1c1be37c3ec7e6bb77c6ba4dac19f94b4d1402e65"
+        }
+      ]
     },
     {
       "name": "flare",
