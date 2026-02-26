@@ -1,6 +1,7 @@
 const { exec } = require("child_process");
 const { ipcRenderer } = require("electron");
-const { getCategories } = require("./services/categoryService");
+const path = require("path");
+const { getCategories } = require(path.join(__dirname, "..", "services", "categoryService"));
 
 const categories = getCategories();
 const categoryList = document.getElementById("category-list");
