@@ -76,6 +76,11 @@ uninstall:
 	rm -rf "$(DESTDIR)$(LIBDIR)"
 flatpak:
 	@echo "📦 Building Flare as Flatpak..."
+	@if [ ! -d "node_modules" ]; then \
+		echo "❌ node_modules not found!"; \
+		echo "Run 'npm install --omit=dev' first"; \
+		exit 1; \
+	fi
 	@if ! command -v flatpak-builder > /dev/null; then \
 		echo "❌ flatpak-builder not found. Install it with:"; \
 		echo "   Fedora: sudo dnf install flatpak-builder"; \
