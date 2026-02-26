@@ -3,6 +3,7 @@
   "runtime": "org.gnome.Platform",
   "runtime-version": "46",
   "sdk": "org.gnome.Sdk",
+  
   "command": "flare",
   "finish-args": [
     "--share=network",
@@ -20,7 +21,15 @@
     {
       "name": "nodejs",
       "buildsystem": "simple",
-      "build-commands": ["apt-get update && apt-get install -y nodejs npm"]
+      "build-commands": [
+        "NODE_VERSION=18.20.1",
+        "ARCH=x64",
+        "curl -fsSL https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz -o /tmp/node.tar.xz",
+        "tar -xJf /tmp/node.tar.xz -C /tmp",
+        "cp -r /tmp/node-v$NODE_VERSION-linux-$ARCH/* /usr/local/",
+        "rm /tmp/node.tar.xz"
+      ],
+      "sources": []
     },
     {
       "name": "flare",
