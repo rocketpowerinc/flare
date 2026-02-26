@@ -42,7 +42,8 @@
       "sources": [
         {
           "type": "dir",
-          "path": "."
+          "path": ".",
+          "skip-git-ignore": true
         }
       ]
     },
