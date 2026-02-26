@@ -95,6 +95,7 @@ git clone https://github.com/rocketpowerinc/flare.git
 cd flare
 npm install --omit=dev
 flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
+rm -rf build-flatpak ~/.local/share/flatpak/staging
 make flatpak
 ```
 
