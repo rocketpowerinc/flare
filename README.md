@@ -91,6 +91,8 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 Install dependencies and build the Flatpak bundle locally:
 
 ```bash
+git clone https://github.com/rocketpowerinc/flare.git
+cd flare
 npm install --omit=dev
 flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
 make flatpak
