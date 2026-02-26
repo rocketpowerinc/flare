@@ -88,18 +88,19 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 ### Build and Test Locally
 
-Install dependencies, then build from the repository directory:
+Install dependencies, add them to git, then build the Flatpak:
 
 ```bash
-git clone https://github.com/rocketpowerinc/flare.git
-cd flare
 npm install --omit=dev
+git add -f node_modules/
+git commit -m "Add node_modules for Flatpak"
+git push origin main
 flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
 rm -rf build-flatpak ~/.local/share/flatpak/staging
 make flatpak
 ```
 
-This bundles `node_modules` into the Flatpak. Then run:
+Then run:
 
 ```bash
 flatpak run com.github.rocketpowerinc.flare
@@ -107,34 +108,28 @@ flatpak run com.github.rocketpowerinc.flare
 
 > **Important:**
 >
-> - Run `npm install --omit=dev` in your repository directory **before** running `make flatpak`
-> - The `node_modules` directory must exist locally and will be bundled into the Flatpak
-> - Do NOT use a fresh git clone; use an existing repository where you've run `npm install`
+> - Install dependencies locally: `npm install --omit=dev`
+> - Add `node_modules/` to git: `git add -f node_modules/` (necessary for Flatpak builds)
+> - Commit and push before building: `git commit -m "..."` and `git push origin main`
+> - The build sandbox has no network access, so dependencies must be bundled from git
 
 > ⚠️ **Build error troubleshooting**
 >
-> **node_modules not found error:** If you see `ERROR: node_modules not found!`, run this first:
+> **node_modules not found error:** If the build fails with "node_modules not found", ensure you:
 >
 > ```bash
 > npm install --omit=dev
-> make flatpak
-> ```
->
-> **npm install errors (EAI_AGAIN):** The Flatpak build sandbox doesn't have network access. Ensure `node_modules` is installed locally:
->
-> ```bash
-> npm install --omit=dev
+> git add -f node_modules/
+> git commit -m "Add node_modules"
+> git push origin main
 > rm -rf build-flatpak ~/.local/share/flatpak/staging
 > make flatpak
 > ```
 >
-> If you encounter other Flatpak build errors, ensure you have the latest code and clean build cache:
+> **Electron sandbox errors at runtime:** If you see SUID sandbox errors, the `node_modules` wasn't bundled properly. Verify it's in git:
 >
 > ```bash
-> git pull origin main
-> rm -rf build-flatpak ~/.local/share/flatpak/staging
-> npm install --omit=dev
-> make flatpak
+> ls -la /app/lib/flare/node_modules  # Inside Flatpak
 > ```
 >
 > If you see an error like `cp: cannot stat 'node-v18.20.1-linux-x64/*': No such file or directory`,

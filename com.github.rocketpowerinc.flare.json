@@ -33,19 +33,19 @@
       "name": "flare",
       "buildsystem": "simple",
       "build-commands": [
-        "if [ ! -d 'node_modules' ]; then echo 'ERROR: node_modules not found! Run npm install --omit=dev first.' && exit 1; fi",
+        "if [ ! -d 'node_modules' ]; then echo 'ERROR: node_modules not found! See README for build instructions.' && exit 1; fi",
         "mkdir -p /app/bin /app/lib/flare",
         "cp -r . /app/lib/flare/",
-        "test -d /app/lib/flare/node_modules && echo 'SUCCESS: node_modules bundled' || echo 'WARNING: node_modules may not have been copied'",
+        "test -d /app/lib/flare/node_modules && echo 'SUCCESS: node_modules bundled' || echo 'WARNING: node_modules missing'",
         "chmod +x /app/lib/flare/bin/flare",
         "cat > /app/bin/flare << 'EOF'\n#!/bin/bash\nexec /app/lib/flare/bin/flare \"$@\"\nEOF",
         "chmod +x /app/bin/flare"
       ],
       "sources": [
         {
-          "type": "dir",
-          "path": ".",
-          "skip-git-ignore": true
+          "type": "git",
+          "url": "https://github.com/rocketpowerinc/flare.git",
+          "branch": "main"
         }
       ]
     },
