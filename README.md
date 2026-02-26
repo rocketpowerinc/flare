@@ -102,7 +102,7 @@ Then run the Flatpak:
 flatpak run com.github.rocketpowerinc.flare
 ```
 
-> **Important:** Run `npm install --omit=dev` in your repository directory *before* building. The Flatpak must include `node_modules` since the build sandbox has no network access. The manifest is configured to include `node_modules` from your local directory.
+> **Important:** Run `npm install --omit=dev` in your repository directory _before_ building. The Flatpak must include `node_modules` since the build sandbox has no network access. The manifest is configured to include `node_modules` from your local directory.
 
 > ⚠️ **Build error troubleshooting**
 >
