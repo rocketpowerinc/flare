@@ -7,15 +7,22 @@ function getCategories() {
   return fs.readdirSync(assetsPath, { withFileTypes: true })
     .filter(d => d.isDirectory())
     .map(d => {
-      const config = JSON.parse(
-        fs.readFileSync(path.join(assetsPath, d.name, "config.json"))
-      );
-      return {
-        name: d.name,
-        wallpaper: path.join(assetsPath, d.name, "wallpaper.png"),
-        apps: config.apps
-      };
-    });
+      const cfgPath = path.join(assetsPath, d.name, "config.json");
+      if (!fs.existsSync(cfgPath)) return null;
+
+      try {
+        const config = JSON.parse(fs.readFileSync(cfgPath));
+        return {
+          name: d.name,
+          wallpaper: path.join(assetsPath, d.name, "wallpaper.png"),
+          apps: config.apps
+        };
+      } catch (err) {
+        console.warn(`Skipping category ${d.name}: failed to read config.json`, err);
+        return null;
+      }
+    })
+    .filter(Boolean);
 }
 
 module.exports = { getCategories };
