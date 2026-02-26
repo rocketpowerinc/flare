@@ -88,33 +88,39 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 ### Build and Test Locally
 
-Build and install the Flatpak locally:
+Pre-install dependencies and build the Flatpak:
 
 ```bash
+npm install --omit=dev
 flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
-# (or use the direct flatpak-builder command below)
-git clone https://github.com/rocketpowerinc/flare.git
-cd flare
 make flatpak
 ```
 
+> **Important:** You must run `npm install --omit=dev` before building the Flatpak, as the build sandbox does not have network access to npm registry.
+
 > ⚠️ **Build error troubleshooting**
 >
-> If you encounter a Flatpak build error, ensure you have the latest code and clean build cache:
+> **npm install errors (EAI_AGAIN):** The Flatpak build sandbox doesn't have network access. Run `npm install --omit=dev` locally first:
 >
 > ```bash
-> git pull origin main
+> npm install --omit=dev
 > rm -rf build-flatpak ~/.local/share/flatpak/staging
 > make flatpak
 > ```
 >
-> **npm install errors (EAI_AGAIN):** If you see network errors like `request to https://registry.npmjs.org failed`, the Flatpak build needs network access. Update to the latest `com.github.rocketpowerinc.flare.json` which includes proper build environment configuration.
+> If you encounter other Flatpak build errors, ensure you have the latest code and clean build cache:
 >
-> **npm ci errors:** If you see `npm ERR! The npm ci command can only install with an existing package-lock.json`, update to the latest `com.github.rocketpowerinc.flare.json` which uses `npm install --omit=dev` instead.
+> ```bash
+> git pull origin main
+> rm -rf build-flatpak ~/.local/share/flatpak/staging
+> npm install --omit=dev
+> make flatpak
+> ```
+>
+> **npm ci errors:** If you see `npm ERR! The npm ci command can only install with an existing package-lock.json`, run `npm install --omit=dev` first.
 >
 > If you see an error like `cp: cannot stat 'node-v18.20.1-linux-x64/*': No such file or directory`,
-> the Node archive has already been extracted and the top‑level directory name may differ.
-> The repository includes the corrected build command that copies Node.js to `/app` instead of `/usr/local/`:
+> the Node archive has already been extracted. The repository includes the corrected build command that copies Node.js to `/app` instead of `/usr/local/`:
 >
 > ```json
 > "build-commands": ["mkdir -p /app", "cp -r * /app/"]
