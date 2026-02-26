@@ -29,7 +29,7 @@
         {
           "type": "archive",
           "url": "https://nodejs.org/dist/v18.20.1/node-v18.20.1-linux-x64.tar.xz",
-          "sha256": "5d21b924bfbe25a5fd96c2b1c1be37c3ec7e6bb77c6ba4dac19f94b4d1402e65"
+          "sha256": "1d08285abd9fad971af5c73d13e8f2a6ae9f2906ee036095dad7d5c286642a4e"
         }
       ]
     },
