@@ -3,7 +3,9 @@
   "runtime": "org.gnome.Platform",
   "runtime-version": "46",
   "sdk": "org.gnome.Sdk",
-
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.node18"
+  ],
   "command": "flare",
   "finish-args": [
     "--share=network",
@@ -14,37 +16,32 @@
     "--device=dri",
     "--filesystem=home",
     "--filesystem=/run/user",
-    "--system-talk-name=org.freedesktop.Flatpak"
+    "--talk-to-name=org.freedesktop.Flatpak",
+    "--allow=devel"
   ],
+  "build-options": {
+    "append-path": "/usr/lib/sdk/node18/bin",
+    "append-ld-library-path": "/usr/lib/sdk/node18/lib",
+    "env": {
+      "npm_config_nodedir": "/usr/lib/sdk/node18"
+    }
+  },
   "modules": [
-    {
-      "name": "nodejs",
-      "buildsystem": "simple",
-      "build-commands": ["mkdir -p /app", "cp -r * /app/"],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://nodejs.org/dist/v18.20.1/node-v18.20.1-linux-x64.tar.xz",
-          "sha256": "1d08285abd9fad971af5c73d13e8f2a6ae9f2906ee036095dad7d5c286642a4e"
-        }
-      ]
-    },
     {
       "name": "flare",
       "buildsystem": "simple",
       "build-commands": [
-        "if [ ! -d 'node_modules' ]; then echo 'ERROR: node_modules not found! Run: npm install --omit=dev' && exit 1; fi",
+        "npm ci --production",
         "mkdir -p /app/bin /app/lib/flare",
         "cp -r . /app/lib/flare/",
-        "test -d /app/lib/flare/node_modules && echo 'SUCCESS: node_modules bundled' || echo 'WARNING: node_modules missing'",
-        "chmod +x /app/lib/flare/bin/flare",
         "cat > /app/bin/flare << 'EOF'\n#!/bin/bash\nexec /app/lib/flare/bin/flare \"$@\"\nEOF",
         "chmod +x /app/bin/flare"
       ],
       "sources": [
         {
-          "type": "dir",
-          "path": "."
+          "type": "git",
+          "url": "https://github.com/rocketpowerinc/flare.git",
+          "branch": "main"
         }
       ]
     },
