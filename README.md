@@ -104,7 +104,8 @@ This bundles `node_modules` into the Flatpak. Then run:
 flatpak run com.github.rocketpowerinc.flare
 ```
 
-> **Important:** 
+> **Important:**
+>
 > - Run `npm install --omit=dev` in your repository directory **before** running `make flatpak`
 > - The `node_modules` directory must exist locally and will be bundled into the Flatpak
 > - Do NOT use a fresh git clone; use an existing repository where you've run `npm install`
