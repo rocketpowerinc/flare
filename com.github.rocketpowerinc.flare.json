@@ -20,9 +20,7 @@
     {
       "name": "nodejs",
       "buildsystem": "simple",
-      "build-commands": [
-        "apt-get update && apt-get install -y nodejs npm"
-      ]
+      "build-commands": ["apt-get update && apt-get install -y nodejs npm"]
     },
     {
       "name": "flare",
