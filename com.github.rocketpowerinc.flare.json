@@ -21,8 +21,7 @@
       "name": "nodejs",
       "buildsystem": "simple",
       "build-commands": [
-        "mkdir -p /app/bin",
-        "curl -L https://nodejs.org/dist/v18.18.0/node-v18.18.0-linux-x64.tar.xz | tar xJ --strip-components=1 -C /app"
+        "apt-get update && apt-get install -y nodejs npm"
       ]
     },
     {
