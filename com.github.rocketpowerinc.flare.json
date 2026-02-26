@@ -33,10 +33,9 @@
       "name": "flare",
       "buildsystem": "simple",
       "build-commands": [
+        "if [ ! -d 'node_modules' ]; then echo 'ERROR: node_modules not found! Run npm install --omit=dev first.' && exit 1; fi",
         "mkdir -p /app/bin /app/lib/flare",
-        "ls -la | grep node_modules || echo 'node_modules NOT found in source'",
         "cp -r . /app/lib/flare/",
-        "ls -la /app/lib/flare/ | grep node_modules || echo 'node_modules NOT copied to /app/lib/flare'",
         "chmod +x /app/lib/flare/bin/flare",
         "cat > /app/bin/flare << 'EOF'\n#!/bin/bash\nexec /app/lib/flare/bin/flare \"$@\"\nEOF",
         "chmod +x /app/bin/flare"

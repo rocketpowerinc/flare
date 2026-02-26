@@ -88,7 +88,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 ### Build and Test Locally
 
-Install dependencies in the repository directory, then build the Flatpak:
+Install dependencies, then build from the repository directory:
 
 ```bash
 git clone https://github.com/rocketpowerinc/flare.git
@@ -98,17 +98,27 @@ flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
 make flatpak
 ```
 
-Then run the Flatpak:
+This bundles `node_modules` into the Flatpak. Then run:
 
 ```bash
 flatpak run com.github.rocketpowerinc.flare
 ```
 
-> **Important:** Run `npm install --omit=dev` in your repository directory _before_ building. The Flatpak must include `node_modules` since the build sandbox has no network access. The manifest is configured to include `node_modules` from your local directory.
+> **Important:** 
+> - Run `npm install --omit=dev` in your repository directory **before** running `make flatpak`
+> - The `node_modules` directory must exist locally and will be bundled into the Flatpak
+> - Do NOT use a fresh git clone; use an existing repository where you've run `npm install`
 
 > ⚠️ **Build error troubleshooting**
 >
-> **npm install errors (EAI_AGAIN):** The Flatpak build sandbox doesn't have network access. Run `npm install --omit=dev` locally first:
+> **node_modules not found error:** If you see `ERROR: node_modules not found!`, run this first:
+>
+> ```bash
+> npm install --omit=dev
+> make flatpak
+> ```
+>
+> **npm install errors (EAI_AGAIN):** The Flatpak build sandbox doesn't have network access. Ensure `node_modules` is installed locally:
 >
 > ```bash
 > npm install --omit=dev
@@ -124,8 +134,6 @@ flatpak run com.github.rocketpowerinc.flare
 > npm install --omit=dev
 > make flatpak
 > ```
->
-> **npm ci errors:** If you see `npm ERR! The npm ci command can only install with an existing package-lock.json`, run `npm install --omit=dev` first.
 >
 > If you see an error like `cp: cannot stat 'node-v18.20.1-linux-x64/*': No such file or directory`,
 > the Node archive has already been extracted. The repository includes the corrected build command that copies Node.js to `/app` instead of `/usr/local/`:
