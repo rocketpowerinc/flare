@@ -1,0 +1,54 @@
+app-id: com.github.rocketpowerinc.flare
+runtime: org.gnome.Platform
+runtime-version: '46'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.node18
+
+command: flare
+
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=wayland
+  - --socket=x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --filesystem=home
+  - --filesystem=/run/user
+  - --talk-to-name=org.freedesktop.Flatpak
+  - --allow=devel
+
+build-options:
+  append-path: /usr/lib/sdk/node18/bin
+  append-ld-library-path: /usr/lib/sdk/node18/lib
+  env:
+    npm_config_nodedir: /usr/lib/sdk/node18
+
+modules:
+  - name: flare
+    buildsystem: simple
+    build-commands:
+      - npm ci --production
+      - mkdir -p /app/bin /app/lib/flare
+      - cp -r . /app/lib/flare/
+      - |
+        cat > /app/bin/flare << 'EOF'
+        #!/bin/bash
+        exec /app/lib/flare/bin/flare "$@"
+        EOF
+      - chmod +x /app/bin/flare
+    sources:
+      - type: git
+        url: https://github.com/rocketpowerinc/flare.git
+        branch: main
+
+  - name: desktop-file
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/share/applications
+      - cp config/flare.desktop /app/share/applications/com.github.rocketpowerinc.flare.desktop
+    sources:
+      - type: git
+        url: https://github.com/rocketpowerinc/flare.git
+        branch: main

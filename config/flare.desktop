@@ -6,3 +6,4 @@ Exec=flare
 Type=Application
 Categories=Utility;
 Terminal=false
+StartupNotify=true

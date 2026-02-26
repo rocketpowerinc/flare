@@ -63,6 +63,76 @@ Quick system-wide install:
 sudo make install PREFIX=/usr/local
 ```
 
+## Building as Flatpak
+
+Flare can be packaged and distributed as a Flatpak for simple installation across different Linux distributions.
+
+### Prerequisites for Flatpak Builds
+
+```bash
+# Fedora
+sudo dnf install flatpak flatpak-builder
+
+# Ubuntu/Debian
+sudo apt install flatpak flatpak-builder
+
+# Arch
+sudo pacman -S flatpak flatpak-builder
+```
+
+Add the Flathub repository:
+
+```bash
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
+
+### Build and Test Locally
+
+Build and install the Flatpak locally:
+
+```bash
+make flatpak
+```
+
+or directly:
+
+```bash
+flatpak-builder --user --install --force-clean build-flatpak com.github.rocketpowerinc.flare.json
+```
+
+Then run:
+
+```bash
+flatpak run com.github.rocketpowerinc.flare
+```
+
+### Create a Distributable Bundle
+
+Generate a `.flatpak` file to share with others:
+
+```bash
+make flatpak-bundle
+```
+
+This creates `flare.flatpak` which can be installed by others with:
+
+```bash
+flatpak install flare.flatpak
+flatpak run com.github.rocketpowerinc.flare
+```
+
+### Publish to Flathub
+
+To submit Flare to Flathub for public distribution:
+
+1. Fork https://github.com/flathub/flathub
+2. Create a folder `com.github.rocketpowerinc.flare/`
+3. Copy `com.github.rocketpowerinc.flare.json` to that folder
+4. Submit a pull request
+5. Follow [Flathub submission guidelines](https://docs.flathub.org/docs/for-app-authors)
+
+For more details, see [FLATPAK.md](docs/FLATPAK.md)
+
 ## Usage
 
 ### Starting the Application
@@ -122,6 +192,8 @@ make dev           # Development mode
 make build         # Build only
 make install       # System-wide install (requires sudo)
 make uninstall     # Remove installation
+make flatpak       # Build and install as Flatpak
+make flatpak-bundle # Create distributable Flatpak bundle
 make clean         # Clean artifacts
 make help          # Show all commands
 ```
