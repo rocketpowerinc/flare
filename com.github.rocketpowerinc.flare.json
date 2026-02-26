@@ -3,7 +3,7 @@
   "runtime": "org.gnome.Platform",
   "runtime-version": "46",
   "sdk": "org.gnome.Sdk",
-  
+
   "command": "flare",
   "finish-args": [
     "--share=network",
