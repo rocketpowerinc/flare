@@ -88,7 +88,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 ### Build and Test Locally
 
-Install dependencies, add them to git, then build the Flatpak:
+Install dependencies in your repository directory, then build the Flatpak:
 
 ```bash
 git clone https://github.com/rocketpowerinc/flare.git
@@ -107,10 +107,9 @@ flatpak run com.github.rocketpowerinc.flare
 
 > **Important:**
 >
-> - Install dependencies locally: `npm install --omit=dev`
-> - Add `node_modules/` to git: `git add -f node_modules/` (necessary for Flatpak builds)
-> - Commit and push before building: `git commit -m "..."` and `git push origin main`
-> - The build sandbox has no network access, so dependencies must be bundled from git
+> - Run `npm install --omit=dev` in your repository directory **before** running `make flatpak`
+> - The Flatpak build uses your local directory, so `node_modules` must exist locally
+> - The build sandbox has no network access, dependencies are bundled from your local `node_modules`
 
 > ⚠️ **Build error troubleshooting**
 >
