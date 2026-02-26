@@ -94,6 +94,7 @@ Install dependencies in your repository directory, then build the Flatpak:
 git clone https://github.com/rocketpowerinc/flare.git
 cd flare
 npm install --omit=dev
+sudo apt install flatpak-builder
 flatpak install flathub org.gnome.Sdk//46 org.gnome.Platform//46 -y
 rm -rf build-flatpak ~/.local/share/flatpak/staging
 make flatpak
